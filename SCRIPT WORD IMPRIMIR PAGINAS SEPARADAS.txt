@@ -1,0 +1,17 @@
+Sub SalvarPaginasComoPDF()
+    Dim i As Integer
+    Dim TotalPaginas As Integer
+    Dim NomeArquivo As String
+    
+    TotalPaginas = ActiveDocument.ComputeStatistics(wdStatisticPages)
+    
+    For i = 1 To TotalPaginas
+        ' Define o nome do arquivo (ex: Pagina_1.pdf)
+        NomeArquivo = ActiveDocument.Path & "\Pagina_" & i & ".pdf"
+        
+        ActiveDocument.ExportAsFixedFormat OutputFileName:=NomeArquivo, _
+            ExportFormat:=wdExportFormatPDF, Range:=wdExportFromTo, From:=i, To:=i
+    Next i
+    
+    MsgBox "Concluído! Os arquivos estão na mesma pasta do documento original."
+End Sub
